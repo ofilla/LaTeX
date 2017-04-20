@@ -1,0 +1,186 @@
+\input{tex_contents/header}
+\author{me}
+\title{
+	\LaTeX\\
+	\textsc{physics}--Cheatsheet\\
+	\small{
+		Zusammenfassende Übersicht über das \textsc{physics}--Paket\footnote{Quelle und ausführliche Dokumentation:
+			\url{https://www.ctan.org/pkg/physics}
+		}
+	}
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\clearpage
+\section{Automatische Klammersetzung}
+\aligns{
+	% nur klammern
+	\qty(1) &&				% klammern, rund
+	\qty[1] &&				% klammern, eckig
+	\qty|1| &&				% klammern, gerade
+	\qty{1}\\				% klammern, geschweift
+	% Groesse manuell veraendern / anpassen:
+	% automatisch - big - Big - bigg - Bigg
+	\qty(\frac{1}{2}) &&
+	\qty\big(\frac{1}{2})&&
+	\qty\Big(\frac{1}{2})&&
+	\qty\bigg(\frac{1}{2})&&
+	\qty\Bigg(\frac{1}{2})\\
+	% anderes
+	\\\\
+	\abs{1} &&				% Betrag
+	\norm{1} \\				% Norm
+	\eval{x}_0^\infty&& 	% Evaluierung
+	\order{x^2} \\			% Ordnung x^2
+	&&
+	\comm{A}{B}  &&			% Kommutator
+	\acomm{A}{B} && 		% Antikommutator
+	\pb{A}{B}				% Poisson-Klammern	
+}
+
+\section{Vektornotationen}
+\eqn{
+	% mit *: zzgl. italic / greek
+	\vb{a} 	&\rightarrow& \vb*{a}\\				% vector bold, no greek (gets bold)
+	\vb{\theta} &\rightarrow& \vb*{\theta}\\	% vector bold italic, greek gets bold
+	\vu{a}\\										% vector unit
+	\vb{a} \vdot \vb{b}\\							% dot product
+	\vb{a} \cp \vb{b}\\								% cross product
+	\grad &:&										% gradient
+	\grad{\Psi}\qc
+	\grad(\Psi+\Phi)\qc									% long-form (wie mit qty)
+	\grad[\Psi+\Phi]\\									% long-form (wie mit qty)
+	\div &:&										% divergence
+	\div{\vb{a}}\qc
+	\div(\Psi+\Phi)\qc									% long-form (wie mit qty)
+	\div[\Psi+\Phi]\\									% long-form (wie mit qty)
+	\curl &:&										% rotation
+	\curl{\vb{a}}\qc
+	\curl(\vb{a}+\vb{b})\qc
+	\curl[\vb{a}+\vb{b}]\\
+	\laplacian &:&									% laplacian		
+	\laplacian{\vb{a}}\qc
+	\laplacian(\vb{a}+\vb{b})\qc
+	\laplacian[\vb{a}+\vb{b}]\\
+}
+
+
+\section{Operatoren}
+Sinus etc. brauchen \emph{kein} \textbackslash qty für angepasste Klammern!
+\eqn{
+	\sin(x)\qc		% normale Form
+	\sin[2](x)\qc	% optional: power (sin^x)
+	\sin x			% funktioniert auch ohne Argument
+}
+Analog funktionieren:
+\aligns{
+	\sin(x) &&
+	\cos(x) &&
+	\tan(x) &&
+	\csc(x) &&
+	\sec(x) &&
+	\cot(x)\\
+	\sinh(x) &&
+	\cosh(x) &&
+	\tanh(x) &&
+	\csch(x) &&
+	\sech(x) &&
+	\coth(x)\\
+	\arcsin(x) &&
+	\arccos(x) &&
+	\arctan(x) &&
+	\arccsc(x) &&
+	\arcsec(x) &&
+	\arccot(x)\\
+	\exp(x) &&					% exponential
+	\log(x) &&					% logarithm
+	\ln(x) &&					% naturallogarithm
+	\det(x) &&					% determinant
+	\Pr(x)	&&					% propability
+	\tr M \\					% Spur (trace), Klammern wie \qty
+	\Tr M &&					% trace
+	\rank M &&					% Rank 
+	\erf M &&					% gaussian error function
+	\Res[f(z)]	\\				% residue, Klammern wie \qty
+	\Re{z} &&					% Realteil
+	\real(z) &&
+	\Im{z} &&					% Imaginärteil
+	\imaginary(z) &&
+%		\pv{\int f(z) \dd{z}} &&	% cauchy principal value
+%		\PV{\int f(z) \dd{z}}\\		% cauchy principal value
+}
+
+\section{Texte mit Abständen einfügen}
+% quick quad text
+\aligns{
+	1 \qq{, text}  2	&&							% analog zu \quad\text{}\quad
+	1 \qq*{, text} 2	&&							% analog zu \text{}\quad
+	\qc \\											% \qcomma
+}
+geht analog auch für:
+\emph{then, else, otherwise, unless, given, using, assume, since, let, for, all, even, odd, integer, and, or, as, in}
+
+\section{Ableitungen}
+\eqn{
+	\dd &:&						% differenzial, das normale "d"
+	\dd x\qc					% "dx"
+	\dd{x}\qc					% "	dx "
+	\dd[3]{x}\qc				% "d^3x"
+	\dd(\cos\theta)				% "d(\cos\theta)
+	\\\\
+	\dv{x} &:&					% d/dx (Bruchschreibweise)
+	\dv{f}{x}\qc				% df/dx (Bruchschreibweise)
+	\dv[n]{f}{x}\qc
+	\dv{x}(\dv{L}{\dot{x}})\qc	% mit Klammern wie \qty
+	\dv*{}{t}					% wie "df/dx" in einer Zeile, nutzt \flatfrac
+	\\\\
+	\pdv{x} &:&					% partielle Ableitung als Bruch (hier, in den Kommentaren, schreibe ich "D" statt \partial)
+	\pdv{f}{x}\qc				% Df/Dx
+	\pdv[n]{f}{x}\qc			% D^nf/Dx^n
+	\pdv{f}{x}{y}\\				% gemischte Schreibweise: Df/DxDy
+%		\pdv{f}{x}{y}{z}			% !!!geht nicht mehr!!!
+}
+Sonstige Ableitungen (für uns Physiker unüblich):
+\eqn{
+	% funktioniert wie \dd
+	\var{F[g(x)]} &&			% Variation: F[g(x)] 
+	\var(E-TS)\\					% mit Klammern wie \qty
+	% funktioniert wie \dv
+	\fdv{g} &:&					% Funktionalableitung \delta / \delta g
+	\fdv{F}{g}\qc						% DF/Dg
+	\fdv{V}(E-TS)\qc					% langform
+	\fdv*{F}{x}						% mit \flatfrac
+}
+
+\section{Dirac bra--ket Notation}
+Um die Klammer $\bra{\phi}\ket{\psi}$ korrekt darzustellen, darf kein Abstand zwischen den beiden Klammern sein. Ansonsten sieht es wie in diesem Satz $\bra{\phi} \ket{\psi}$ aus. Zudem gibt es noch mehrere andere Funktionen:
+\eqn{
+	\braket{a}{b} \qc \braket{a} \qc \ip{a}{b}  \\		% braket
+	\ketbra{a}{b} \qc \op{a}{b} \qc	\op{a}\\	  		% ketbra
+	\expval{A} \qc \expval{A}{\Psi} \qc \ev{A}{\Psi} \\	% expectationvalue
+	% ohne * wird der mittlere Block von der Größenanpassung ignoriert
+	% mit  * wird keine Größenanpassung vorgenommen
+	% mit ** wird der mittlere Block für die Größenanpassung berücksichtigt
+	\ev{\text{\large{A}}}{\Psi} \qc \ev*{\text{\large{A}}}{\Psi} \qc \ev**{\text{\large{A}}}{\Psi}\\ 
+	\matrixel{n}{A}{m} \qc \mel{n}{A}{m}				% matrixelement, all 3 elements required
+}
+
+\section{Matrizen}
+\eqn{
+	\mqty(\imat{2}) &&\\ 		% identity matrix in n dimensions
+	\mqty(\imat{2}) \qquad \mqty*(\imat{2}) && \mqty[\imat{2}] \qquad \mqty{\imat{2}} \qquad \mqty|\imat{2}| \\	% Matrizen-Umgebung
+	\mdet{\imat{2}} \\ 			% matrix determinant
+	\imat{2}  		\\			% just the ELEMENTS of the identity matrix
+	% xmat: elements for n-m-Matrix same element x
+	\mqty(\xmat{x}{2}{4}) && \mqty(\xmat*{x}{2}{4}) \\		% xmat* adds element indices
+	\mqty(\zmat{2}{5})	\\		% elements of zero matrix
+	\mqty(\pmat{0}) \qquad \mqty(\pmat{1}) && \mqty(\pmat{2}) \qquad \mqty(\pmat{3}) \\ % pauli matrix
+	\mqty(\dmat{1,2,3}) \qquad \mqty(\dmat[0]{1,2}) && \mqty(\dmat{1,2&3\\4&5}) \\		% diagonal matrix
+	\mqty(\admat{1,2,3})		% anti-diagonal matrix
+}
+Zudem gibt es z.\,B. $\smqty(\imat{2})$, was eine verkleinerte Darstellung mittels \emph{smallmatrix} erzeugt.
+\end{document}

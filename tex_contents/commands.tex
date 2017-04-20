@@ -1,0 +1,58 @@
+% % access theorems
+\newcommand{\Def}[2][]{
+	\noindent
+	\newline
+	\vspace*{0.3\baselineskip}
+	\textbf{Definition:} #1
+	\newline
+	#2
+	\vspace*{\baselineskip}
+}
+
+% % equation arrays
+\newcommand{\aligns}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\eqn}[1]{\begin{eqnarray*}#1\end{eqnarray*}}
+\newcommand{\eqnno}[1]{\begin{eqnarray}#1\end{eqnarray}}
+
+% % boxes
+\newcommand{\eqnbox}[1]{
+	\begin{center}
+		\begin{tcolorbox}[width=0.9\textwidth]
+			\abovedisplayskip=-3pt
+			\begin{eqnarray}
+				#1
+			\end{eqnarray}
+		\end{tcolorbox}
+	\end{center}
+}
+\newcommand{\tbox}[1]{
+	\begin{center}
+		\begin{tcolorbox}
+			#1
+		\end{tcolorbox}
+	\end{center}
+}
+
+% % matrices
+\newcommand{\IdMatrix}{\mathds{1}}
+\newcommand{\Transposed}[1]{#1^{\,\mathsf{T}}}
+\newcommand{\tp}[1]{\Transposed{#1}}
+\newcommand{\Mspace}{\:\:} % fuer Einstein-Summenkonvention (Abstand zum rechten Index)
+\newcommand{\Cases}[1]{\begin{cases}#1\end{cases}}
+
+% % % colors
+% % basic colors
+\newcommand{\Red}[1]{\textcolor{Red}{#1}}
+\newcommand{\Blue}[1]{\textcolor{Blue}{#1}}
+% % bold printed colors
+\newcommand{\Redbf}[1]{\textbf{\Red{#1}}}
+\newcommand{\Bluebf}[1]{\textbf{\Blue{#1}}}
+
+% set custom references
+\makeatletter
+\newcommand{\manuallabel}[2]{\def\@currentlabel{#2}\label{#1}}
+\makeatother
+% usage: 
+%	set label to sect. 2
+%	\label{key}
+% \manuallabel{label}{key}
